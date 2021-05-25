@@ -9,6 +9,7 @@
 
     <string name="true_button">对</string>
     <string name="false_button">错</string>
+    <string name="perv_button">上一题</string>
     <string name="next_button">下一题</string>
 
     <string name="correct_toast">正确!</string>
