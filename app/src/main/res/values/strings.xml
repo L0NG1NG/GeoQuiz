@@ -1,10 +1,19 @@
 <resources>
     <string name="app_name">GeoQuiz</string>
-    <string name="question_text">堪培拉是澳大利亚的首都</string>
+    <string name="question_australia">堪培拉是澳大利亚的首都</string>
+    <string name="question_ocean">太平洋比大西洋更大</string>
+    <string name="question_mideast">苏伊士运河连接着红海和印度洋</string>
+    <string name="question_africa">尼罗河的起源是埃及</string>
+    <string name="question_americas">亚马逊河是最长的河</string>
+    <string name="question_asia">亚马逊河是最长的河</string>
+
     <string name="true_button">对</string>
     <string name="false_button">错</string>
+    <string name="next_button">下一题</string>
 
     <string name="correct_toast">正确!</string>
     <string name="incorrect_toast">错误!</string>
+
+    <!--\n代表换行符-->
 
 </resources>
