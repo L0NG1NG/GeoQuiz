@@ -11,12 +11,16 @@ import android.widget.TextView
 //就是为了避免来自其他应用extra冲突
 private const val EXTRA_ANSWER_IS_TRUE = "com.longing.geoquiz.answer_is_true"
 const val EXTRA_ANSWER_SHOWN = "com.longing.geoquiz.answer_shown"
+const val KEY_IS_ANSWER_SHOWN = "is_answer_shown"
 
 class CheatActivity : AppCompatActivity() {
     private lateinit var answerTextView: TextView
     private lateinit var showAnswerButton: Button
 
     private var answerIsTrue = false
+
+    private var isAnswerShown = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_cheat)
@@ -24,16 +28,29 @@ class CheatActivity : AppCompatActivity() {
         answerTextView = findViewById(R.id.answer_text_view)
         showAnswerButton = findViewById(R.id.show_answer_button)
 
-        showAnswerButton.setOnClickListener {
-            val answerText = when {
-                answerIsTrue -> R.string.true_button
-                else -> R.string.false_button
-            }
-            answerTextView.setText(answerText)
+        isAnswerShown = savedInstanceState?.getBoolean(KEY_IS_ANSWER_SHOWN) ?: false
+        if (isAnswerShown) showAnswer()
 
-            setAnswerShowResult(true)
+
+        showAnswerButton.setOnClickListener {
+            showAnswer()
+            isAnswerShown = true
         }
 
+    }
+
+    private fun showAnswer() {
+        val answerText = when {
+            answerIsTrue -> R.string.true_button
+            else -> R.string.false_button
+        }
+        answerTextView.setText(answerText)
+        setAnswerShowResult(true)
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putBoolean(KEY_IS_ANSWER_SHOWN, isAnswerShown)
     }
 
     private fun setAnswerShowResult(isAnswerShown: Boolean) {
