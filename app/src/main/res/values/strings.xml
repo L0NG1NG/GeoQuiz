@@ -16,4 +16,9 @@
 
     <!--\n代表换行符-->
 
+    <string name="warning_text">确定要看答案</string>
+    <string name="show_answer_button">我不管</string>
+    <string name="cheat_button">点击作弊</string>
+    <string name="judgment_toast">你作弊了！</string>
+
 </resources>
