@@ -1,12 +1,16 @@
 package com.longing.geoquiz
 
+import android.annotation.SuppressLint
 import android.app.Activity
+import android.app.ActivityOptions
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.longing.geoquiz.viewmodel.QuizViewModel
@@ -31,8 +35,6 @@ class MainActivity : AppCompatActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        Log.i(TAG, "onActivityResult: requestCode-->$requestCode")
-        Log.i(TAG, "onActivityResult: resultCode-->$resultCode")
 
         if (resultCode != Activity.RESULT_OK) {
             return
@@ -44,6 +46,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    @SuppressLint("NewApi")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -70,10 +73,19 @@ class MainActivity : AppCompatActivity() {
             updateQuestion()
         }
 
-        cheatButton.setOnClickListener {
+        //不用it,改用lambda增加可读性
+        cheatButton.setOnClickListener { view ->
             val currentQuestionAnswer = quizViewModel.currentQuestionAnswer
             val intent = CheatActivity.newIntent(this, currentQuestionAnswer)
-            startActivityForResult(intent, REQUEST_CODE_CHEAT)
+
+            if (Build.VERSION.SDK_INT > Build.VERSION_CODES.M) {
+                val options =
+                    ActivityOptions.makeClipRevealAnimation(view, 0, 0, view.width, view.height)
+                startActivityForResult(intent, REQUEST_CODE_CHEAT, options.toBundle())
+            } else {
+                startActivityForResult(intent, REQUEST_CODE_CHEAT)
+                
+            }
 
         }
         updateQuestion()
@@ -99,7 +111,7 @@ class MainActivity : AppCompatActivity() {
 
         val messageResId = when {
             quizViewModel.isCheater -> R.string.judgment_toast
-            correctAnswer==userAnswer -> R.string.correct_toast
+            correctAnswer == userAnswer -> R.string.correct_toast
             else -> R.string.incorrect_toast
         }
 
