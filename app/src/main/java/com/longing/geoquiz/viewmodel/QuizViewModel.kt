@@ -17,6 +17,8 @@ class QuizViewModel : ViewModel() {
 
     var currentIndex = 0
     var isCheater = false
+    var cheatCounts = 0
+
 
     val currentQuestionAnswer: Boolean
         get() = questionBank[currentIndex].answer
@@ -26,5 +28,9 @@ class QuizViewModel : ViewModel() {
 
     fun moveToNext() {
         currentIndex = (currentIndex + 1) % questionBank.size
+        isCheater = false
+        if (currentIndex == 0) {
+            cheatCounts = 0
+        }
     }
 }

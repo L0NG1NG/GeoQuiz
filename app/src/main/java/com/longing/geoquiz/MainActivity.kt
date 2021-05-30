@@ -76,7 +76,9 @@ class MainActivity : AppCompatActivity() {
         //不用it,改用lambda增加可读性
         cheatButton.setOnClickListener { view ->
             val currentQuestionAnswer = quizViewModel.currentQuestionAnswer
-            val intent = CheatActivity.newIntent(this, currentQuestionAnswer)
+            val intent = CheatActivity.newIntent(this,
+            currentQuestionAnswer,quizViewModel.cheatCounts)
+
 
             if (Build.VERSION.SDK_INT > Build.VERSION_CODES.M) {
                 val options =
@@ -84,7 +86,7 @@ class MainActivity : AppCompatActivity() {
                 startActivityForResult(intent, REQUEST_CODE_CHEAT, options.toBundle())
             } else {
                 startActivityForResult(intent, REQUEST_CODE_CHEAT)
-                
+
             }
 
         }
@@ -110,7 +112,10 @@ class MainActivity : AppCompatActivity() {
         val correctAnswer = quizViewModel.currentQuestionAnswer
 
         val messageResId = when {
-            quizViewModel.isCheater -> R.string.judgment_toast
+            quizViewModel.isCheater -> {
+                quizViewModel.cheatCounts++
+                R.string.judgment_toast
+            }
             correctAnswer == userAnswer -> R.string.correct_toast
             else -> R.string.incorrect_toast
         }

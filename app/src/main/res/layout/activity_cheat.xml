@@ -21,9 +21,21 @@
         tools:text="Answer" />
 
     <Button
-        android:text="@string/show_answer_button"
         android:id="@+id/show_answer_button"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:text="@string/show_answer_button" />
+
+    <TextView
+        android:id="@+id/remnant_counts_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp" />
+
+    <TextView
+        android:id="@+id/api_level_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp" />
 
 </LinearLayout>
