@@ -4,8 +4,8 @@
     <string name="question_ocean">太平洋比大西洋更大</string>
     <string name="question_mideast">苏伊士运河连接着红海和印度洋</string>
     <string name="question_africa">尼罗河的起源是埃及</string>
-    <string name="question_americas">亚马逊河是最长的河</string>
-    <string name="question_asia">亚马逊河是最长的河</string>
+    <string name="question_americas">亚马逊河是美国最长的河</string>
+    <string name="question_asia">贝加尔湖是世界上最古老最深的淡水湖</string>
 
     <string name="true_button">对</string>
     <string name="false_button">错</string>
